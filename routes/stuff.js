@@ -2,19 +2,19 @@ const express = require('express');
 
 const router = express.Router();
 
-const  Thing = require('../models/thing');
+const  auth = require('../middleware/auth');
 
 const stuffCtr = require('../controllers/stuff');
   
-router.get('/', stuffCtr.getAllStuff);
+router.get('/', auth, stuffCtr.getAllStuff);
 
-router.post('/', stuffCtr.createThing);
+router.post('/', auth, stuffCtr.createThing);
 
-router.get('/:id', stuffCtr.getOneThing);
+router.get('/:id', auth, stuffCtr.getOneThing);
 
-router.put('/:id', stuffCtr.modifyThing);
+router.put('/:id', auth, stuffCtr.modifyThing);
 
-router.delete('/:id', stuffCtr.deleteThing);
+router.delete('/:id', auth, stuffCtr.deleteThing);
 
 
 

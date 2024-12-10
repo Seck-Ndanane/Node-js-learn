@@ -1,6 +1,10 @@
 //const { hash } = require("bcrypt");
 //const { json } = require("express");
+const bcrypt = require('bcrypt');
 const  User = require('../models/User');
+
+//pour installer le jsonzweb token on le fqit qvec : npm install jsonwebtoken --force
+const jwt = require('jsonwebtoken');
 
 
 exports.signup = (req, res, next) =>{
@@ -35,7 +39,15 @@ exports.login = (req, res, next) =>{
                     }
                     res.status(200).json({
                         userId : user._id,
-                        token : 'TOKEN'
+                        // On utilise la fonction sign de jwtwebtoken pour chiffer un nouveau token
+                        token : jwt.sign(
+                            //ce token contiw=ent l'id de l'utilisqteur en tant que payload 
+                            {userId : user._id},
+                            //chaine secret de developpement pour crypter notre token( c q remplqcer pqr une chaine bcp plus longue en cqs de production)
+                            'RANDOM_TOKEN_SECRET',
+                            // duree de validite du token
+                            {expiresIn : '24h'}
+                        )
                     });
                 })
                 .catch(error => res.status(500).json({error}));

@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
-const app = express();
 
 mongoose.connect(
   'mongodb+srv://seck:Babacar98@fisrtcluster.l2euc.mongodb.net/?retryWrites=true&w=majority&appName=FisrtCluster',
@@ -13,6 +12,7 @@ mongoose.connect(
     .then(() => console.log('Connexion a Mongodb reussie'))
     .catch(() => console.log('Connexion a mongodb echoue'))
 
+const app = express();
 app.use(express.json());
  
 app.use((req, res, next) => {
@@ -23,6 +23,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/stuff', stuffRoutes);
-app.use('/api/stuff', userRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
