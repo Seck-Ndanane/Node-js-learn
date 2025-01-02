@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
 
+const path = require('path');
+
 
 mongoose.connect(
   'mongodb+srv://seck:Babacar98@fisrtcluster.l2euc.mongodb.net/?retryWrites=true&w=majority&appName=FisrtCluster',
@@ -22,6 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/images', express.static(path.join(__dirname, 'images')));// pour renvoyer des fichiers stqtics pour une route donnee
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 

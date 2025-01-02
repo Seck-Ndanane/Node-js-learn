@@ -7,3 +7,7 @@ parfois faut utiliser --force pour une bonne execution
 
 installer le package de chiffrement bcrypt aavec
 # npm install bcrypt --force
+
+
+Pour gerer les fichiers on peut utiliser multer 
+# npm install multer 
